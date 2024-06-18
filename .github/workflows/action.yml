@@ -1,6 +1,6 @@
 name: FirstWorkflow
 
-on: workflow_dispatch
+on: push
 
 jobs:
   first-job:
@@ -20,6 +20,38 @@ jobs:
         run: |
           choco install chromedriver --version=<latest version>
           choco install googlechrome
+
+      - name: Set up Maven
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: maven
+
+      - name: Build with Maven
+        run: mvn clean install
+
+      - name: Run tests
+        run: mvn test
+
+  second-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y chromium-chromedriver
+          sudo apt-get install -y chromium-browser
 
       - name: Set up Maven
         uses: actions/setup-java@v2
