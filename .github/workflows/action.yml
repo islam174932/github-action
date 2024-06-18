@@ -1,7 +1,6 @@
 name: FirstWorkflow
 
-on: push
-
+on: [push, workflow_dispatch]
 jobs:
   first-job:
     runs-on: windows-latest
