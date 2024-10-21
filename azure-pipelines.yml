@@ -9,12 +9,8 @@ jobs:
   pool:
     vmImage: 'windows-latest'
 
-  steps:
-    - task: Checkout@1
-      inputs:
-        repository: '$(Build.Repository.Name)'
-    
-    - task: JavaToolInstaller@0
+
+      - task: JavaToolInstaller@0
       inputs:
         versionSpec: '17'
         jdkArchitectureOption: 'x64'
@@ -41,10 +37,7 @@ jobs:
   pool:
     vmImage: 'ubuntu-latest'
 
-  steps:
-    - task: Checkout@1
-      inputs:
-        repository: '$(Build.Repository.Name)'
+ 
     
     - task: JavaToolInstaller@0
       inputs:
